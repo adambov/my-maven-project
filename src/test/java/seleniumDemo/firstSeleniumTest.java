@@ -13,7 +13,7 @@ public class firstSeleniumTest {
         WebDriver driver = new ChromeDriver();
 
         driver.get("https://www.google.bg/");
-        Thread.sleep(10000);
+
         driver.quit();
     }
 

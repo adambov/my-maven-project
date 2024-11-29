@@ -1,3 +1,5 @@
+package practice;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import org.testng.annotations.DataProvider;

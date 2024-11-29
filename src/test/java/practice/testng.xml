@@ -2,7 +2,7 @@
 <suite name="MyTestSuite" parallel="methods" thread-count="5">
     <test name="OrderTests">
         <package name="com.n3qa.tests"/>
-        <class name="OrderProcessingTestWithDataProvider"/>
-        <class name="WebPageContentWithDataProvider"/>
+        <class name="practice.OrderProcessingTestWithDataProvider"/>
+        <class name="practice.WebPageContentWithDataProvider"/>
     </test>
 </suite>

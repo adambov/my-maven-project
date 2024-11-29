@@ -26,9 +26,6 @@ public class MyLoginISkillo {
 
     @Test
     public void navigateToLoginPAge(){
-        String LOGIN_URL = BASE_URL + "users/login";
-
-
         driver.get(BASE_URL);
 
         WebElement logInAnchor = driver.findElement(By.xpath("//*[contains(@id, 'nav-link-login')]"));

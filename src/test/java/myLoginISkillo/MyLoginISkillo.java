@@ -53,6 +53,8 @@ public class MyLoginISkillo {
 
         signInButton.click();
 
+        driver.quit();
+
     }
 
 }

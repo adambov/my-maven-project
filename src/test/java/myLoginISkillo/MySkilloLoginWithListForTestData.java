@@ -40,9 +40,9 @@ public class MySkilloLoginWithListForTestData {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             WebElement usernameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username or email']")));
-            WebElement passwordInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Password']")));
+            WebElement passwordInput = driver.findElement(By.xpath("//input[@placeholder='Password']"));
             WebElement signInButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#sign-in-button")));
-            WebElement rememberMeCheckbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@type='checkbox']")));
+            WebElement rememberMeCheckbox = driver.findElement(By.xpath("//input[@type='checkbox']"));
 
             String expectedUsernamePlaceholder = "Username or email";
             String expectedPasswordPlaceholder = "Password";

@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,9 +22,14 @@ public class RegistrationFormISkillo {
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }
+    @AfterMethod
+    public void quitBrowser() throws java. lang. InterruptedException {
+        Thread.sleep(5555);
+        driver.quit();
+    }
 
     @Test
-    public void navigateToRegisterPage() throws java. lang. InterruptedException{
+    public void navigateToRegisterPage() {
         driver.get(BASE_URL);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -39,11 +45,11 @@ public class RegistrationFormISkillo {
         registerAnchor.click();
 
         WebElement usernameRegFormInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
-        WebElement emailRegFormInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='email']")));
-        WebElement birthDateRegFormInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Birth date']")));
-        WebElement passwordRegFormInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Password']")));
-        WebElement confirmPasswordRegFormInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Confirm Password']")));
-        WebElement publicInfoRegForm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@placeholder='Public info']")));
+        WebElement emailRegFormInput = driver.findElement(By.xpath("//input[@placeholder='email']"));
+        WebElement birthDateRegFormInput = driver.findElement(By.xpath("//input[@placeholder='Birth date']"));
+        WebElement passwordRegFormInput = driver.findElement(By.xpath("//input[@placeholder='Password']"));
+        WebElement confirmPasswordRegFormInput = driver.findElement(By.xpath("//input[@placeholder='Confirm Password']"));
+        WebElement publicInfoRegForm = driver.findElement(By.xpath("//textarea[@placeholder='Public info']"));
         WebElement signInButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='sign-in-button']")));
 
         boolean isDisabled = signInButton.getAttribute("disabled") != null;
@@ -62,7 +68,5 @@ public class RegistrationFormISkillo {
 
         signInButton.click();
 
-        Thread.sleep(5555);
-        driver.quit();
     }
 }

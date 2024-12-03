@@ -24,18 +24,20 @@ public class RegistrationFormISkillo {
     }
     @AfterMethod
     public void quitBrowser() throws java. lang. InterruptedException {
-        Thread.sleep(5555);
+        Thread.sleep(25555);
         driver.quit();
     }
 
     @Test
-    public void navigateToRegisterPage() {
+    public void navigateToRegisterPage() throws InterruptedException {
+
+        
         driver.get(BASE_URL);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        WebElement logInAnchor = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(@id, 'nav-link-login')]")));
-        logInAnchor.click();
+        WebElement navBarLoginLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(@id, 'nav-link-login')]")));
+        navBarLoginLink.click();
 
         WebElement notAMember = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='color-black']")));
         String actualNotAMember = notAMember.getText();
@@ -56,16 +58,16 @@ public class RegistrationFormISkillo {
 
         Assert.assertTrue(isDisabled);
 
-        usernameRegFormInput.sendKeys("NaskoDambov");
+        usernameRegFormInput.sendKeys("NaskoDambovTest");
         emailRegFormInput.sendKeys("atanas.dambov@gmail.com");
-        birthDateRegFormInput.sendKeys("1997-12-16");
+        birthDateRegFormInput.sendKeys("12-03-1997");
         passwordRegFormInput.sendKeys("Password123");
         confirmPasswordRegFormInput.sendKeys("Password123");
         publicInfoRegForm.sendKeys("Hello, It's me :)");
 
         boolean isEnabled = signInButton.getAttribute("disabled") == null;
         Assert.assertTrue(isEnabled);
-
+Thread.sleep(25555);
         signInButton.click();
 
     }

@@ -15,6 +15,7 @@ import java.time.Duration;
 
 public class MyLoginISkillo {
     private final static String BASE_URL = "http://training.skillo-bg.com:4300/";
+    private final static String LOGIN_URL = BASE_URL + "users/login";
     WebDriver driver = new ChromeDriver();
 
     @BeforeMethod
@@ -23,18 +24,22 @@ public class MyLoginISkillo {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }
     @AfterMethod
-    public void closeBrowser(){
+    public void closeBrowser() throws InterruptedException {
+        Thread.sleep(5555);
         driver.quit();
     }
 
     @Test
-    public void navigateToLoginPAge(){
+    public void verifyWorngCredsMesssage()  {
         driver.get(BASE_URL);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         WebElement logInAnchor = driver.findElement(By.xpath("//*[contains(@id, 'nav-link-login')]"));
         logInAnchor.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.urlContains("login"));
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, LOGIN_URL);
 
         WebElement usernameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username or email']")));
         WebElement passwordInput = driver.findElement(By.xpath("//input[@placeholder='Password']"));
@@ -49,13 +54,16 @@ public class MyLoginISkillo {
 
             usernameInput.clear();
             passwordInput.clear();
-            usernameInput.sendKeys("TestUser");
+            usernameInput.sendKeys("NaskoDambov");
             passwordInput.sendKeys("Password123");
 
             rememberMeCheckbox.click();
-
         signInButton.click();
 
+        WebElement toastMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='toast-container']")));
+        Assert.assertTrue(toastMessage.getText().contains("Success"), "Expected success message not found in toast.");
     }
-
 }
+//1. verify error message
+//2. to take the pop-up as element and verify it
+//3. to verify the url of the login

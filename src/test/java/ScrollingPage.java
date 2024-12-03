@@ -28,7 +28,5 @@ public class ScrollingPage {
             actions.sendKeys(Keys.PAGE_DOWN).perform();
             Thread.sleep(500);
         }
-
-
     }
 }

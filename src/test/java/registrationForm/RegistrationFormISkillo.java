@@ -14,6 +14,7 @@ import java.time.Duration;
 
 public class RegistrationFormISkillo {
     public static final String BASE_URL = "http://training.skillo-bg.com:4300/";
+    public static final String REGISTRATION_URL = "http://training.skillo-bg.com:4300/users/register";
 
     WebDriver driver = new ChromeDriver();
 
@@ -22,16 +23,15 @@ public class RegistrationFormISkillo {
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }
+
     @AfterMethod
-    public void quitBrowser() throws java. lang. InterruptedException {
-        Thread.sleep(25555);
+    public void quitBrowser() throws InterruptedException {
+        Thread.sleep(5555);
         driver.quit();
     }
 
     @Test
-    public void navigateToRegisterPage() throws InterruptedException {
-
-        
+    public void verifyRegisterFlow() {
         driver.get(BASE_URL);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -46,6 +46,10 @@ public class RegistrationFormISkillo {
         WebElement registerAnchor = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Register']")));
         registerAnchor.click();
 
+        wait.until(ExpectedConditions.urlContains("register"));
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, REGISTRATION_URL);
+
         WebElement usernameRegFormInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
         WebElement emailRegFormInput = driver.findElement(By.xpath("//input[@placeholder='email']"));
         WebElement birthDateRegFormInput = driver.findElement(By.xpath("//input[@placeholder='Birth date']"));
@@ -58,8 +62,8 @@ public class RegistrationFormISkillo {
 
         Assert.assertTrue(isDisabled);
 
-        usernameRegFormInput.sendKeys("NaskoDambovTest");
-        emailRegFormInput.sendKeys("atanas.dambov@gmail.com");
+        usernameRegFormInput.sendKeys("kflkf%");
+        emailRegFormInput.sendKeys("kfll@gmail.com");
         birthDateRegFormInput.sendKeys("12-03-1997");
         passwordRegFormInput.sendKeys("Password123");
         confirmPasswordRegFormInput.sendKeys("Password123");
@@ -67,8 +71,15 @@ public class RegistrationFormISkillo {
 
         boolean isEnabled = signInButton.getAttribute("disabled") == null;
         Assert.assertTrue(isEnabled);
-Thread.sleep(25555);
+
         signInButton.click();
 
+        WebElement toastMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='toast-container']")));
+        Assert.assertTrue(toastMessage.getText().contains("Success"), "Expected success message not found in toast.");
+
+        WebElement profileButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='nav-link-profile']")));
+        String expectedProfileButtonText = "Profile";
+        String actualProfileButtonText = profileButton.getText();
+        Assert.assertEquals(actualProfileButtonText, expectedProfileButtonText);
     }
 }

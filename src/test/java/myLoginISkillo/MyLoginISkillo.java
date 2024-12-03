@@ -34,8 +34,8 @@ public class MyLoginISkillo {
         driver.get(BASE_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        WebElement logInAnchor = driver.findElement(By.xpath("//*[contains(@id, 'nav-link-login')]"));
-        logInAnchor.click();
+        WebElement logInButton = driver.findElement(By.xpath("//*[contains(@id, 'nav-link-login')]"));
+        logInButton.click();
 
         wait.until(ExpectedConditions.urlContains("login"));
         String currentUrl = driver.getCurrentUrl();
@@ -62,6 +62,11 @@ public class MyLoginISkillo {
 
         WebElement toastMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='toast-container']")));
         Assert.assertTrue(toastMessage.getText().contains("Success"), "Expected success message not found in toast.");
+
+        WebElement profileButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='nav-link-profile']")));
+        String expectedProfileButtonText = "Profile";
+        String actualProfileButtonText = profileButton.getText();
+        Assert.assertEquals(actualProfileButtonText, expectedProfileButtonText);
     }
 }
 //1. verify error message

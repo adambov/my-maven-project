@@ -38,8 +38,5 @@ public class myFirstDropdown {
         Thread.sleep(3333);
 
         firstDropdownMenu.selectByValue("c#");
-
-
-
     }
 }

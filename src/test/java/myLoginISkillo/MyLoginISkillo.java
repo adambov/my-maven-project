@@ -1,8 +1,6 @@
 package myLoginISkillo;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,12 +23,12 @@ public class MyLoginISkillo {
     }
     @AfterMethod
     public void closeBrowser() throws InterruptedException {
-        Thread.sleep(5555);
+        Thread.sleep(555);
         driver.quit();
     }
 
     @Test
-    public void verifyWorngCredsMesssage()  {
+    public void verifySuccessLogin ()  {
         driver.get(BASE_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
@@ -72,3 +70,4 @@ public class MyLoginISkillo {
 //1. verify error message
 //2. to take the pop-up as element and verify it
 //3. to verify the url of the login
+//по-добре да направя текста на месидж попъпа на стринг променлива и след това с асърт равно да го сраванявам

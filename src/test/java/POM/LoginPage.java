@@ -62,4 +62,5 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(actualProfileButtonText, expectedProfileButtonText);
         System.out.println("User is on home page after login");
     }
+
 }

@@ -21,6 +21,7 @@ public class HomePage extends BasePage{
         navigateTo(HOME_PAGE_URL);
         System.out.println("The user has navigated ot the home page");
 
+
     }
     public void clickOnNavigationBarLoginButton(){
         WebElement navBarLoginLink = driver.findElement(By.id(navBarLoginLink_locator));
